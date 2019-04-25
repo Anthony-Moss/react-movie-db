@@ -11,7 +11,7 @@ function ActorList(props) {
         </ul>
     )
 }
-
-
-
+ActorList.propTypes = {
+    actors: PropTypes.array.isRequired
+};
 export default ActorList
