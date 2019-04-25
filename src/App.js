@@ -11,14 +11,26 @@ class App extends React.Component {
     super(props);
     this.state = {
       genre: ''
+
     }
   }
   render() {
     return (
       <div className="App">
         <GenreList genres={Object.keys(movies)} handleClick={this._setGenre}/>
-        <MovieList movies={Object.keys(movies.documentaries)}/>
-        <ActorList actors={movies.documentaries.robocop} />
+        {
+          this.state.genre ? <MovieList 
+          movies={Object.keys(movies[this.state.genre])}
+          /> 
+        : null
+        }
+        {
+          this.state.movie ? <ActorList
+          actors={movies[this.state.genre][this.state.movie]}
+          /> 
+        : null
+        }
+
       </div>
     );
   }
@@ -31,8 +43,16 @@ class App extends React.Component {
     // just accept the smallest piece fo information
     // needed to set state.
     this.setState({
-      genre: genre
+      genre,
+      movie: ''
     });
+  }
+
+  // Helper function for setting a movie
+  _setMovie = (movie) => {
+    this.setState({
+      movie
+    })
   }
 }
 
